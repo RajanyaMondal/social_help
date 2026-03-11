@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Help - Community Care</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        body {
+            background: #f4f6f8;
+        }
+
+        .request-container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px 15px;
+            padding-bottom: 90px;
+            /* Space for the fixed submit button */
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: #222;
+        }
+
+        .header-subtitle {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+            line-height: 1.4;
+        }
+
+        .form-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+            border: 1px solid #eaeaea;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Modern Inputs */
+        .modern-group {
+            margin-bottom: 15px;
+        }
+
+        .modern-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .field-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 6px;
+        }
+
+        .modern-input {
+            width: 100%;
+            padding: 14px 15px;
+            border: 1.5px solid #eaeaea;
+            border-radius: 12px;
+            font-size: 15px;
+            box-sizing: border-box;
+            outline: none;
+            transition: all 0.3s;
+            background: #fafafa;
+        }
+
+        .modern-input:focus {
+            border-color: #2e7d32;
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(46, 125, 50, 0.1);
+        }
+
+        /* Select Dropdown Specific Styles */
+        select.modern-input {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            cursor: pointer;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%232e7d32%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px top 50%;
+            background-size: 14px auto;
+            padding-right: 40px;
+        }
+
+        /* Fixed Bottom Button */
+        .fixed-footer-action {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 15px 20px;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.05);
+            z-index: 1100;
+            display: flex;
+            justify-content: center;
+        }
+
+        .submit-btn-modern {
+            width: 100%;
+            max-width: 500px;
+            background: #e53935;
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 999px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.3s;
+            box-shadow: 0 4px 12px rgba(229, 57, 53, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .submit-btn-modern:hover {
+            background: #c62828;
+            box-shadow: 0 6px 16px rgba(229, 57, 53, 0.35);
+        }
+
+        .submit-btn-modern:disabled {
+            background: #ef9a9a;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        /* Standalone Address Button */
+        .add-address-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+            padding: 16px;
+            background: #fafafa;
+            border: 2px dashed #ccc;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: left;
+        }
+
+        .add-address-btn:hover {
+            border-color: #2e7d32;
+            background: #f1f8e9;
+        }
+
+        .add-address-btn .icon {
+            font-size: 24px;
+            color: #2e7d32;
+        }
+
+        .add-address-btn .text {
+            flex: 1;
+            font-weight: 700;
+            color: #444;
+            font-size: 15px;
+        }
+
+        /* Selected Address Card */
+        .selected-address-card {
+            display: none;
+            padding: 15px;
+            background: #f1f8e9;
+            border: 1.5px solid #a5d6a7;
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .selected-address-card .label-chip {
+            display: inline-block;
+            background: white;
+            padding: 4px 10px;
+            border-radius: 100px;
+            font-size: 11px;
+            font-weight: 700;
+            color: #2e7d32;
+            margin-bottom: 8px;
+            border: 1px solid #c8e6c9;
+            text-transform: uppercase;
+        }
+
+        .selected-address-card .address-text {
+            font-size: 14px;
+            color: #333;
+            line-height: 1.5;
+            font-weight: 600;
+            white-space: pre-line;
+        }
+
+        .selected-address-card .details-row {
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #c8e6c9;
+            font-size: 13px;
+            color: #555;
+        }
+
+        .change-address-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: #1976d2;
+            font-weight: 700;
+            font-size: 13px;
+            cursor: pointer;
+            padding: 4px 8px;
+        }
+
+        .change-address-btn:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body class="partner-page">
+
+    <div class="top-bar">
+        <div class="top-bar-left">
+            <a href="javascript:history.back()" class="top-bar-back" title="Go Back">
+                <svg viewBox="0 0 24 24">
+                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
+                </svg>
+            </a>
+            <a href="index.html" class="top-bar-link">Home</a>
+        </div>
+        <div class="top-bar-right" id="auth-bar">
+      <a href="login.html" class="top-bar-link">Login</a>
+      <a href="register.html" class="top-bar-link top-bar-link--primary">Sign Up</a>
+    </div>
+    </div>
+
+    <!-- 🔐 Auth Guard -->
+    
+
+    <main class="request-container">
+        <div class="header-section">
+            <h2 class="header-title">Request Urgent Help</h2>
+            <p class="header-subtitle">Submit your request and our nearest partners will be notified immediately.</p>
+        </div>
+
+        <form id="helpRequestForm" onsubmit="submitRequest(event)">
+
+            <!-- 1. Help Type Card -->
+            <div class="form-card">
+                <div class="card-title"><span>1.</span> What do you need help with?</div>
+                <div class="modern-group">
+                    <select id="type" class="modern-input" required>
+                        <option value="" disabled selected>Select a service...</option>
+                        <option value="Electricity">⚡ Electricity</option>
+                        <option value="Water">💧 Water</option>
+                        <option value="Medicine">💊 Medicine</option>
+                        <option value="Ambulance">🚑 Ambulance</option>
+                        <option value="Grocery">🥖 Groceries</option>
+                        <option value="Children">🎒 Children & Education</option>
+                        <option value="Elderly">🧓 Elderly Care</option>
+                        <option value="Disaster">🌪️ Disaster Response</option>
+                    </select>
+                </div>
+            </div>
+
+            <script>
+                // Instantly parse URL and pre-select before the rest of the page even finishes loading
+                (function () {
+                    const params = new URLSearchParams(window.location.search);
+                    const service = params.get('service');
+                    if (service) {
+                        const map = {
+                            'electricity': 'Electricity',
+                            'water': 'Water',
+                            'medicine': 'Medicine',
+                            'ambulance': 'Ambulance',
+                            'grocery': 'Grocery',
+                            'children': 'Children',
+                            'elderly': 'Elderly',
+                            'disaster': 'Disaster'
+                        };
+                        const exactVal = map[service.toLowerCase()];
+                        if (exactVal) {
+                            document.getElementById('type').value = exactVal;
+                        }
+                    }
+                })();
+            </script>
+
+            <!-- 2. Personal Info Card -->
+            <div class="form-card">
+                <div class="card-title"><span>2.</span> Personal Details</div>
+                <div class="modern-group">
+                    <label class="field-label">Full Name</label>
+                    <input id="name" type="text" placeholder="John Doe" class="modern-input" required>
+                </div>
+                <div class="modern-group">
+                    <label class="field-label">Phone Number</label>
+                    <input id="phone" type="tel" placeholder="+91 XXXXX XXXXX" class="modern-input" required>
+                </div>
+            </div>
+
+            <!-- 3. Problem Description Card -->
+            <div class="form-card">
+                <div class="card-title"><span>3.</span> Describe the Situation</div>
+                <textarea id="problem" class="modern-input" style="height: 100px; resize: none;"
+                    placeholder="Please assist me with..." required></textarea>
+            </div>
+
+            <!-- 4. Location Details Card -->
+            <div class="form-card">
+                <div class="card-title"><span>4.</span> Delivery Location</div>
+
+                <!-- State 1: Empty Address State -->
+                <button type="button" class="add-address-btn" id="add-address-btn"
+                    onclick="window.location.href='address_search.html'">
+                    <span class="icon">📍</span>
+                    <span class="text">➕ Add Delivery Address</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2">
+                        <path d="M9 18l6-6-6-6" />
+                    </svg>
+                </button>
+
+                <!-- State 2: Selected Address Card -->
+                <div class="selected-address-card" id="selected-address-card">
+                    <button type="button" class="change-address-btn"
+                        onclick="window.location.href='address_search.html'">Change</button>
+                    <div class="label-chip" id="card-label">Home</div>
+                    <div class="address-text" id="card-address">Loading...</div>
+                    <div class="details-row" id="card-receiver">Receiver: Name (Phone)</div>
+                </div>
+
+                <!-- Hidden inputs to submit to Firestore easily -->
+                <input type="hidden" id="final-coords" required>
+                <input type="hidden" id="final-fulladdress">
+            </div>
+
+            <!-- Fixed Footer Submit Button -->
+            <div class="fixed-footer-action">
+                <button type="submit" class="submit-btn-modern">
+                    <span style="font-size: 18px;">🚨</span> Request Help Now
+                </button>
+            </div>
+        </form>
+    </main>
+
+    <footer style="text-align: center; padding: 40px 0; color: #666;">
+        <p>Community Care Emergency Network © 2026</p>
+    </footer>
+
+    <script type="module">
+        import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { db } from "../js/firebase-init.js";
+
+        let currentAddressData = null;
+
+        window.submitRequest = async function (event) {
+            event.preventDefault();
+            const name = document.getElementById("name").value;
+            const phone = document.getElementById("phone").value;
+            const type = document.getElementById("type").value;
+            const problem = document.getElementById("problem").value;
+            const finalCoords = document.getElementById("final-coords").value;
+
+            if (!finalCoords || !currentAddressData) {
+                alert("Please add a delivery address before requesting help!");
+                document.querySelector('.add-address-btn').style.borderColor = '#e53935';
+                document.querySelector('.add-address-btn').style.background = '#ffebee';
+                window.scrollTo({ top: document.querySelector('.add-address-btn').offsetTop - 100, behavior: 'smooth' });
+                return;
+            }
+
+            const btn = event.target.querySelector('button[type="submit"]');
+
+            const requestData = {
+                name,
+                phone,
+                location: finalCoords, // Raw coordinates
+                type,
+                problem,
+                status: "pending",
+                requestedAt: new Date(),
+                // Dump all verified modern form details
+                receiverName: currentAddressData.receiverName,
+                receiverPhone: currentAddressData.receiverPhone,
+                landmark: currentAddressData.landmark || "",
+                label: currentAddressData.label || "Other",
+                details: currentAddressData.details || "",
+                fullAddress: currentAddressData.fullAddress || "",
+                locationPhoto: currentAddressData.locationPhoto || null
+            };
+
+            if (btn) { btn.disabled = true; btn.textContent = "Sending..."; }
+
+            try {
+                await addDoc(collection(db, "helpRequests"), requestData);
+                alert("✅ Request Sent! Stay calm, our team is processing it.");
+
+                // Clear state
+                localStorage.removeItem('pending_location');
+                currentAddressData = null;
+                document.getElementById('final-coords').value = "";
+                document.getElementById('add-address-btn').style.display = 'flex';
+                document.getElementById('selected-address-card').style.display = 'none';
+
+                event.target.reset();
+                window.location.href = 'index.html'; // Go home on success
+            } catch (error) {
+                alert("❌ Error: " + error.message);
+                if (btn) { btn.disabled = false; btn.innerHTML = '<span style="font-size: 18px;">🚨</span> Request Help Now'; }
+            }
+        }
+
+            // Execute initialization directly since type="module" runs after DOM parse
+            (function initializeRequestForm() {
+                // Check for modern 2-step flow location payload
+                const savedLocation = localStorage.getItem('pending_location');
+                if (savedLocation) {
+                    const data = JSON.parse(savedLocation);
+                    currentAddressData = data;
+
+                    // Configure the specific hidden inputs required for submission
+                    document.getElementById('final-coords').value = data.coords;
+                    document.getElementById('final-fulladdress').value = data.fullAddress;
+
+                    // Hide Add button, Show Selected Card
+                    document.getElementById('add-address-btn').style.display = 'none';
+                    const card = document.getElementById('selected-address-card');
+                    card.style.display = 'block';
+
+                    // Inject UI details
+                    document.getElementById('card-label').innerText = data.label || "Other";
+                    document.getElementById('card-address').innerText = data.fullAddress || data.address;
+
+                    if (data.receiverName && data.receiverPhone) {
+                        document.getElementById('card-receiver').innerText = `Receiver: ${data.receiverName} \nPhone: ${data.receiverPhone}`;
+                    } else {
+                        document.getElementById('card-receiver').style.display = 'none';
+                    }
+
+                    // Smooth scroll to the location block so they see it succeeded
+                    setTimeout(() => card.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
+                }
+            })();
+    </script>
+</body>
+
+</html>

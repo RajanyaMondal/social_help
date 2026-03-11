@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate - Community Care</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <div class="top-bar">
+        <div class="top-bar-left">
+            <a href="javascript:history.back()" class="top-bar-back" title="Go Back">
+                <svg viewBox="0 0 24 24">
+                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
+                </svg>
+            </a>
+            <a href="index.html" class="top-bar-link">Home</a>
+            <div class="top-bar-social" aria-label="Social links">
+                <a href="#" class="top-bar-icon" title="Instagram" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path
+                            d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 2A3.75 3.75 0 0 0 4 7.75v8.5A3.75 3.75 0 0 0 7.75 20h8.5A3.75 3.75 0 0 0 20 16.25v-8.5A3.75 3.75 0 0 0 16.25 4h-8.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.75-.9a1.15 1.15 0 1 1 0 2.3 1.15 1.15 0 0 1 0-2.3Z" />
+                    </svg>
+                </a>
+                <a href="#" class="top-bar-icon" title="Twitter" aria-label="Twitter">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path
+                            d="M18.9 2h3.1l-6.77 7.74L23 22h-6.2l-4.86-6.27L6.45 22H3.3l7.24-8.27L1 2h6.35l4.39 5.57L18.9 2Zm-1.09 18h1.72L6.41 3.9H4.57L17.81 20Z" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+        <div class="top-bar-right" id="auth-bar">
+      <a href="login.html" class="top-bar-link">Login</a>
+      <a href="register.html" class="top-bar-link top-bar-link--primary">Sign Up</a>
+    </div>
+    </div>
+
+    <!-- 🔐 Auth Guard: redirects to login if not signed in -->
+    
+
+    <main class="auth-page" style="padding: 60px 16px;">
+        <section class="auth-card" style="max-width: 650px;" aria-label="Donation form">
+            <h2 class="auth-title" style="text-align: center;">Make a Donation</h2>
+            <p class="auth-subtitle" style="text-align: center;">Your contribution helps us provide essential services
+                to those in need.</p>
+
+            <form id="donationForm" class="donate-form" style="margin-top: 25px;">
+
+                <!-- Citizen Option -->
+                <div class="donate-section">
+                    <label class="section-label">Citizenship</label>
+                    <div class="radio-group">
+                        <label class="radio-btn">
+                            <input type="radio" name="citizenship" value="indian" checked>
+                            <span class="radio-custom">Indian Citizen</span>
+                        </label>
+                        <label class="radio-btn">
+                            <input type="radio" name="citizenship" value="foreign">
+                            <span class="radio-custom">Foreign Citizen</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Frequency Option -->
+                <div class="donate-section">
+                    <label class="section-label">Donation Type</label>
+                    <div class="radio-group">
+                        <label class="radio-btn">
+                            <input type="radio" name="plan" value="one-time" checked>
+                            <span class="radio-custom">One Time</span>
+                        </label>
+                        <label class="radio-btn">
+                            <input type="radio" name="plan" value="monthly">
+                            <span class="radio-custom">Monthly</span>
+                        </label>
+                        <label class="radio-btn">
+                            <input type="radio" name="plan" value="yearly">
+                            <span class="radio-custom">Yearly</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Purpose -->
+                <div class="donate-section">
+                    <label class="section-label" for="purpose">Donation Purpose</label>
+                    <select id="purpose" name="purpose" class="donate-input">
+                        <!-- Default Options -->
+                        <option value="general">General Fund (Where needed most)</option>
+
+                        <!-- New user requested Options -->
+                        <option value="elder-care">Elder Care</option>
+                        <option value="community-health">Community Health Care</option>
+                        <option value="cancer-care">Cancer Care</option>
+                        <option value="oldage-home">Oldage Home</option>
+                        <option value="disaster-response">Disaster Response</option>
+                        <option value="eye-care">Eye Care</option>
+                        <option value="support-a-gran">Support a Gran</option>
+                        <option value="elder-mobility">Elder Mobility Support</option>
+
+                        <!-- Existing Services -->
+                        <option value="electricity">Electricity Help</option>
+                        <option value="water">Water Pump / Clean Water</option>
+                        <option value="medicine">Medicine & Healthcare</option>
+                        <option value="ambulance">Ambulance Services</option>
+                        <option value="grocery">Food & Groceries</option>
+                        <option value="children">Children Education & Help</option>
+                    </select>
+                </div>
+
+                <!-- Amount -->
+                <div class="donate-section">
+                    <label class="section-label">Select Amount</label>
+                    <div class="amount-group">
+                        <button type="button" class="amount-btn active" data-val="500">500</button>
+                        <button type="button" class="amount-btn" data-val="1000">1000</button>
+                        <button type="button" class="amount-btn" data-val="2000">2000</button>
+                        <button type="button" class="amount-btn" data-val="5000">5000</button>
+                    </div>
+
+                    <div class="custom-amount">
+                        <span class="currency-symbol">₹</span>
+                        <input type="number" id="customAmount" class="donate-input" placeholder="Custom Amount"
+                            value="500" min="1">
+                    </div>
+                </div>
+
+                <!-- Personal Info -->
+                <div class="donate-section">
+                    <label class="section-label">Your Details</label>
+                    <div class="field-row">
+                        <input type="text" id="donorName" placeholder="Full Name" class="donate-input" required>
+                        <input type="email" id="donorEmail" placeholder="Email Address" class="donate-input" required>
+                    </div>
+                    <input type="tel" id="donorPhone" placeholder="Phone Number" class="donate-input"
+                        style="margin-top: 15px;" required>
+                </div>
+
+                <div id="donateMessage" style="text-align:center; margin: 10px 0; font-size: 14px; font-weight: 600;">
+                </div>
+
+                <button type="submit" id="donateBtn" class="donate-submit-btn">Proceed to Donate</button>
+
+            </form>
+        </section>
+    </main>
+
+    <footer style="text-align: center; padding: 20px 0;">
+        <p>Community Care © 2026</p>
+    </footer>
+
+    <script>
+        const amountBtns = document.querySelectorAll('.amount-btn');
+        const customInput = document.getElementById('customAmount');
+        const currencySymbol = document.querySelector('.currency-symbol');
+
+        document.querySelectorAll('input[type="radio"]:checked').forEach(radio => {
+            radio.closest('.radio-btn').classList.add('checked');
+        });
+
+        document.querySelectorAll('input[type="radio"]').forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                const groupName = e.target.name;
+                document.querySelectorAll(`input[name="${groupName}"]`).forEach(r => {
+                    r.closest('.radio-btn').classList.remove('checked');
+                });
+                if (e.target.checked) {
+                    e.target.closest('.radio-btn').classList.add('checked');
+                }
+
+                if (groupName === 'citizenship') {
+                    if (e.target.value === 'foreign') {
+                        currencySymbol.textContent = '$';
+                        customInput.value = '10';
+                        amountBtns[0].dataset.val = '10'; amountBtns[0].textContent = '10';
+                        amountBtns[1].dataset.val = '25'; amountBtns[1].textContent = '25';
+                        amountBtns[2].dataset.val = '50'; amountBtns[2].textContent = '50';
+                        amountBtns[3].dataset.val = '100'; amountBtns[3].textContent = '100';
+                    } else {
+                        currencySymbol.textContent = '₹';
+                        customInput.value = '500';
+                        amountBtns[0].dataset.val = '500'; amountBtns[0].textContent = '500';
+                        amountBtns[1].dataset.val = '1000'; amountBtns[1].textContent = '1000';
+                        amountBtns[2].dataset.val = '2000'; amountBtns[2].textContent = '2000';
+                        amountBtns[3].dataset.val = '5000'; amountBtns[3].textContent = '5000';
+                    }
+                    amountBtns.forEach(b => b.classList.remove('active'));
+                    amountBtns[0].classList.add('active');
+                }
+            });
+        });
+
+        amountBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                amountBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                customInput.value = btn.dataset.val;
+            });
+        });
+
+        customInput.addEventListener('input', () => {
+            let val = customInput.value;
+            amountBtns.forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.val === val);
+            });
+        });
+    </script>
+
+    <script type="module">
+        import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { db } from "../js/firebase-init.js";
+
+        document.getElementById('donationForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('donateBtn');
+            const msgEl = document.getElementById('donateMessage');
+            const currency = document.querySelector('.currency-symbol').textContent;
+
+            const donationData = {
+                name: document.getElementById('donorName').value.trim(),
+                email: document.getElementById('donorEmail').value.trim(),
+                phone: document.getElementById('donorPhone').value.trim(),
+                amount: parseFloat(document.getElementById('customAmount').value),
+                currency: currency,
+                citizenship: document.querySelector('input[name="citizenship"]:checked')?.value,
+                plan: document.querySelector('input[name="plan"]:checked')?.value,
+                purpose: document.getElementById('purpose').value,
+                status: "pending",
+                donatedAt: new Date()
+            };
+
+            btn.disabled = true;
+            btn.textContent = "Processing...";
+            msgEl.style.color = "#666";
+            msgEl.textContent = "Saving your donation...";
+
+            try {
+                await addDoc(collection(db, "donations"), donationData);
+                msgEl.style.color = "#2e7d32";
+                msgEl.textContent = "✅ Thank you! Your donation has been recorded. We will contact you shortly.";
+                e.target.reset();
+                document.querySelectorAll('.amount-btn').forEach((b, i) => b.classList.toggle('active', i === 0));
+                document.getElementById('customAmount').value = '500';
+            } catch (err) {
+                msgEl.style.color = "#c62828";
+                msgEl.textContent = "❌ Error saving donation: " + err.message;
+            } finally {
+                btn.disabled = false;
+                btn.textContent = "Proceed to Donate";
+            }
+        });
+    </script>
+</body>
+
+</html>

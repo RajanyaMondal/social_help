@@ -1,0 +1,1493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Become a Help Partner - Community Care</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    /* Official Partner Form Styles */
+    .partner-form-card {
+      background: white;
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+      max-width: 650px;
+      margin: 15px auto 30px;
+      position: relative;
+      z-index: 10;
+    }
+
+    @media (max-width: 600px) {
+      .partner-form-card {
+        padding: 15px;
+        margin: 10px;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr !important;
+        gap: 12px;
+      }
+    }
+
+    .form-header {
+      text-align: center;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 15px;
+    }
+
+    .form-header h2 {
+      font-size: 28px;
+      color: #333;
+      margin-bottom: 8px;
+    }
+
+    .form-header p {
+      color: #666;
+      font-size: 15px;
+    }
+
+    .form-section {
+      margin-bottom: 25px;
+    }
+
+    .section-title {
+      font-size: 17px;
+      color: #2e7d32;
+      font-weight: 700;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-hint {
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 20px;
+    }
+
+    /* Premium Input Styling */
+    .partner-input-group {
+      margin-bottom: 12px;
+      text-align: left;
+    }
+
+    .partner-input-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #555;
+      margin-bottom: 8px;
+    }
+
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 15px;
+      color: #2e7d32;
+      font-size: 16px;
+      pointer-events: none;
+    }
+
+    .partner-input {
+      width: 100%;
+      padding: 12px 15px 12px 45px;
+      border: 1.5px solid #eee;
+      border-radius: 12px;
+      font-size: 14px;
+      color: #333;
+      transition: all 0.3s ease;
+      background: #fafafa;
+      font-family: inherit;
+    }
+
+    .partner-input:focus {
+      outline: none;
+      border-color: #2e7d32;
+      background: white;
+      box-shadow: 0 0 0 4px rgba(46, 125, 50, 0.1);
+    }
+
+    .partner-input::placeholder {
+      color: #bbb;
+    }
+
+    textarea.partner-input {
+      padding: 12px 15px;
+      resize: vertical;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 5px;
+    }
+
+    .doc-upload-box {
+      border: 2px dashed #ddd;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: #fafafa;
+      position: relative;
+      min-height: 100px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .doc-upload-box.uploaded {
+      border-style: solid;
+      border-color: #2e7d32;
+      background: #f1f8e9;
+    }
+
+    .doc-thumbnail {
+      display: none;
+      width: 100%;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 6px;
+      margin-bottom: 8px;
+    }
+
+    .uploaded .doc-thumbnail {
+      display: block;
+    }
+
+    .uploaded .doc-icon {
+      display: none;
+    }
+
+    .profile-photo-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 25px;
+    }
+
+    .profile-upload-circle {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: #f5f5f5;
+      border: 2px dashed #ccc;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      overflow: hidden;
+      margin-bottom: 15px;
+      transition: all 0.3s;
+      text-align: center;
+      padding: 10px;
+    }
+
+    .profile-icon {
+      font-size: 24px;
+      margin-bottom: 2px;
+    }
+
+    .camera-badge {
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+      background: #2e7d32;
+      color: white;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      border: 2px solid white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      z-index: 5;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .camera-badge:hover {
+      transform: scale(1.1);
+      background: #1b5e20;
+    }
+
+    .camera-badge:active {
+      transform: scale(0.9);
+    }
+
+    .profile-label-inner {
+      font-size: 11px;
+      font-weight: 600;
+      color: #777;
+      line-height: 1.2;
+    }
+
+    .profile-upload-circle:hover {
+      border-color: #2e7d32;
+      background: #f1f8e9;
+    }
+
+    .profile-preview {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+    }
+
+    .uploaded .profile-preview {
+      display: block;
+    }
+
+    .photo-controls {
+      display: none;
+      gap: 10px;
+      margin-top: 8px;
+      justify-content: center;
+    }
+
+    .uploaded+.photo-controls {
+      display: flex;
+    }
+
+    .photo-btn {
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+
+    .btn-edit {
+      color: #2e7d32;
+      background: #f1f8e9;
+      border: 1px solid #2e7d32;
+    }
+
+    .btn-delete {
+      color: #d32f2f;
+      background: #ffebee;
+      border: 1px solid #d32f2f;
+    }
+
+    .photo-btn:hover {
+      opacity: 0.8;
+    }
+
+    /* Action Menu Styles */
+    .action-menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      display: none;
+      align-items: flex-end;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .action-menu-overlay.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .action-menu {
+      width: 100%;
+      background: white;
+      border-radius: 20px 20px 0 0;
+      padding: 20px;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+
+    .action-menu-overlay.active .action-menu {
+      transform: translateY(0);
+    }
+
+    .action-menu-title {
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 20px;
+      text-align: center;
+      font-size: 16px;
+    }
+
+    .action-option {
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      gap: 15px;
+      cursor: pointer;
+      border-radius: 12px;
+      transition: background 0.2s;
+    }
+
+    .action-option:hover {
+      background: #f5f5f5;
+    }
+
+    .action-option-icon {
+      font-size: 20px;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f0f7f0;
+      border-radius: 50%;
+      color: #2e7d32;
+    }
+
+    .action-option-text {
+      flex: 1;
+      font-weight: 500;
+      color: #444;
+    }
+
+    .action-option.remove {
+      margin-top: 10px;
+      border-top: 1px solid #eee;
+      border-radius: 0;
+    }
+
+    .action-option.remove .action-option-icon {
+      background: #fff0f0;
+      color: #d32f2f;
+    }
+
+    .action-cancel {
+      margin-top: 15px;
+      text-align: center;
+      padding: 15px;
+      font-weight: 700;
+      color: #666;
+      cursor: pointer;
+    }
+
+    /* Webcam Modal Styles */
+    .webcam-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 2000;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .webcam-container {
+      width: 100%;
+      max-width: 500px;
+      background: #000;
+      border-radius: 15px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .webcam-frame-guide {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 260px;
+      height: 260px;
+      border: 2px solid rgba(46, 125, 50, 0.6);
+      border-radius: 50%;
+      box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.5);
+      display: none;
+      pointer-events: none;
+    }
+
+    .webcam-frame-guide::after {
+      content: 'Frame your face here';
+      position: absolute;
+      bottom: -35px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .is-profile-capture .webcam-frame-guide {
+      display: block;
+    }
+
+    #webcam-video {
+      width: 100%;
+      display: block;
+      transform: scaleX(-1);
+      /* Mirror effect */
+    }
+
+    .webcam-controls {
+      display: flex;
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .webcam-btn {
+      padding: 15px 30px;
+      border-radius: 50px;
+      border: none;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s;
+    }
+
+    .btn-capture {
+      background: #2e7d32;
+      color: white;
+      box-shadow: 0 4px 15px rgba(46, 125, 50, 0.4);
+    }
+
+    .btn-close-webcam {
+      background: #fff;
+      color: #333;
+    }
+
+    .webcam-btn:active {
+      transform: scale(0.95);
+    }
+
+    #webcam-canvas {
+      display: none;
+    }
+
+    .uploaded .profile-icon {
+      display: none;
+    }
+
+    .doc-upload-box:hover {
+      border-color: #2e7d32;
+      background: #f1f8e9;
+    }
+
+    .doc-icon {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .doc-label {
+      font-weight: 600;
+      font-size: 14px;
+      color: #444;
+      margin-bottom: 5px;
+    }
+
+    .doc-status {
+      font-size: 12px;
+      color: #999;
+      font-weight: 500;
+    }
+
+    .partner-submit-btn {
+      width: 100%;
+      background: #2e7d32;
+      color: white;
+      border: none;
+      padding: 18px;
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(46, 125, 50, 0.2);
+    }
+
+    .partner-submit-btn:hover {
+      background: #1b5e20;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(46, 125, 50, 0.3);
+    }
+
+    .terms-text {
+      text-align: center;
+      font-size: 12px;
+      color: #999;
+      margin-top: 20px;
+    }
+
+    .terms-text a {
+      color: #2e7d32;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    /* WhatsApp Modal Styles */
+    .whatsapp-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 2500;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .whatsapp-container {
+      width: 100%;
+      max-width: 400px;
+      background: #f0f2f5;
+      border-radius: 15px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 500px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    }
+
+    .whatsapp-header {
+      background: #075e54;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .whatsapp-header-text h4 {
+      margin: 0;
+      font-size: 16px;
+    }
+
+    .whatsapp-header-text p {
+      margin: 0;
+      font-size: 11px;
+      color: #b3d9d5;
+    }
+
+    .whatsapp-content {
+      flex: 1;
+      padding: 15px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .whatsapp-connecting {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 20px;
+    }
+
+    .whatsapp-spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid #eee;
+      border-top-color: #25d366;
+      border-radius: 50%;
+      animation: wa-spin 1s linear infinite;
+    }
+
+    @keyframes wa-spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .whatsapp-gallery {
+      display: none;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .whatsapp-media-item {
+      aspect-ratio: 1;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      background: #ddd;
+      transition: transform 0.2s;
+    }
+
+    .whatsapp-media-item:hover {
+      transform: scale(1.05);
+    }
+
+    .whatsapp-media-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .whatsapp-footer {
+      padding: 15px;
+      background: white;
+      text-align: center;
+    }
+
+    .wa-cancel-btn {
+      color: #666;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    @media (max-width: 600px) {
+      .partner-form-card {
+        padding: 25px;
+        margin: -30px 15px 40px;
+      }
+
+      .document-upload-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body class="partner-page">
+
+  <div class="top-bar">
+    <div class="top-bar-left">
+      <a href="javascript:history.back()" class="top-bar-back" title="Go Back">
+        <svg viewBox="0 0 24 24">
+          <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
+        </svg>
+      </a>
+      <a href="index.html" class="top-bar-link">Home</a>
+    </div>
+    <div class="top-bar-right" id="auth-bar">
+      <a href="login.html" class="top-bar-link">Login</a>
+      <a href="register.html" class="top-bar-link top-bar-link--primary">Sign Up</a>
+    </div>
+  </div>
+
+  <!-- 🔐 Auth Guard -->
+
+
+
+  <main class="partner-container">
+
+    <!-- Official Registration Card -->
+    <section class="partner-form-card">
+      <div class="form-header">
+        <h2>Partner Registration</h2>
+        <p>Complete your profile to start your journey as a Help Partner</p>
+      </div>
+      <form onsubmit="registerPartner(event)">
+        <!-- Section 1: Personal Details -->
+        <div class="form-section">
+          <h3 class="section-title">1. Personal Details</h3>
+
+          <div class="profile-photo-section">
+            <div id="profile-container" class="profile-upload-circle" style="position: relative;"
+              onclick="showActionMenu('profile')">
+              <div class="profile-inner-trigger"
+                style="width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+                <span class="profile-icon">👤</span>
+                <span class="profile-label-inner">Upload Profile Photo</span>
+                <img id="profile-preview" class="profile-preview" src="#" alt="Profile">
+              </div>
+              <div class="camera-badge" onclick="event.stopPropagation(); startWebcamDirectly('profile')">📸</div>
+            </div>
+            <input type="file" id="profile-input" hidden accept="image/*"
+              onchange="handleFileUpload(this, 'profile-preview', 'profile-icon', 'profile-status')">
+            <input type="file" id="profile-camera" hidden accept="image/*" capture="camera"
+              onchange="handleFileUpload(this, 'profile-preview', 'profile-icon', 'profile-status')">
+
+            <div class="photo-controls">
+              <span class="photo-btn btn-edit" onclick="showActionMenu('profile')">Change Photo</span>
+              <span class="photo-btn btn-delete"
+                onclick="removeUploadedPhoto('profile-input', 'profile-preview', 'profile-status', 'profile-container', 'profile-icon', 'Passport size preferred')">Delete
+                Photo</span>
+            </div>
+
+            <span id="profile-status" class="doc-status" style="font-size: 11px; color:#999; margin-top: 5px;">Passport
+              size preferred</span>
+          </div>
+
+          <div class="form-grid">
+            <div class="partner-input-group">
+              <label for="name">Full Name (As per ID)</label>
+              <div class="input-wrapper">
+                <span class="input-icon">👤</span>
+                <input id="name" type="text" class="partner-input" placeholder="e.g., John Doe" required>
+              </div>
+            </div>
+            <div class="partner-input-group">
+              <label for="father-name">Father's / Spouse Name</label>
+              <div class="input-wrapper">
+                <span class="input-icon">👨‍👩‍👧‍👦</span>
+                <input id="father-name" type="text" class="partner-input" placeholder="e.g., Robert Doe" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="partner-input-group">
+              <label for="dob">Date of Birth</label>
+              <div class="input-wrapper">
+                <span class="input-icon">📅</span>
+                <input id="dob" type="date" class="partner-input" required>
+              </div>
+            </div>
+            <div class="partner-input-group">
+              <label for="blood-group">Blood Group</label>
+              <div class="input-wrapper">
+                <span class="input-icon">🩸</span>
+                <select id="blood-group" class="partner-input" required style="padding-left: 45px;">
+                  <option value="">Select Blood Group</option>
+                  <option value="A+">A+</option>
+                  <option value="A-">A-</option>
+                  <option value="B+">B+</option>
+                  <option value="B-">B-</option>
+                  <option value="O+">O+</option>
+                  <option value="O-">O-</option>
+                  <option value="AB+">AB+</option>
+                  <option value="AB-">AB-</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="partner-input-group">
+              <label for="email">Email Address</label>
+              <div class="input-wrapper">
+                <span class="input-icon">📧</span>
+                <input id="email" type="email" class="partner-input" placeholder="john@example.com" required>
+              </div>
+            </div>
+            <div class="partner-input-group">
+              <label for="gender">Gender</label>
+              <div class="input-wrapper">
+                <span class="input-icon">🚻</span>
+                <select id="gender" class="partner-input" required style="padding-left: 45px;">
+                  <option value="">Select Gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="partner-input-group">
+              <label for="phone">Phone Number</label>
+              <div class="input-wrapper">
+                <span class="input-icon">📞</span>
+                <input id="phone" type="tel" class="partner-input" placeholder="+91 00000 00000" required>
+              </div>
+            </div>
+            <div class="partner-input-group">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <label for="whatsapp" style="margin-bottom: 0;">WhatsApp Number</label>
+                <div
+                  style="font-size: 11px; color: #666; cursor: pointer; display: flex; align-items: center; gap: 4px;"
+                  onclick="copyPhoneToWhatsapp()">
+                  <input type="checkbox" id="same-as-phone" style="width: 12px; height: 12px; cursor: pointer;">
+                  <span>Same as Phone</span>
+                </div>
+              </div>
+              <div class="input-wrapper">
+                <span class="input-icon">💬</span>
+                <input id="whatsapp" type="tel" class="partner-input" placeholder="+91 00000 00000" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="partner-input-group">
+              <label for="alt-phone">Alternate Contact No</label>
+              <div class="input-wrapper">
+                <span class="input-icon">🆘</span>
+                <input id="alt-phone" type="tel" class="partner-input" placeholder="Emergency family contact">
+              </div>
+            </div>
+            <div class="partner-input-group">
+              <label for="pincode">Pin Code</label>
+              <div class="input-wrapper">
+                <span class="input-icon">📍</span>
+                <input id="pincode" type="text" class="partner-input" placeholder="6-digits" maxlength="6" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="partner-input-group">
+            <label for="address">Full Residential Address</label>
+            <textarea id="address" class="partner-input" rows="2" placeholder="House/Flat No, Apartment, Locality"
+              required></textarea>
+          </div>
+
+          <div class="form-grid">
+            <div class="partner-input-group">
+              <label for="city">City</label>
+              <div class="input-wrapper">
+                <span class="input-icon">🏙️</span>
+                <input id="city" type="text" class="partner-input" placeholder="e.g., Mumbai" required>
+              </div>
+            </div>
+            <div class="partner-input-group">
+              <label for="state">State</label>
+              <div class="input-wrapper">
+                <span class="input-icon">🗺️</span>
+                <input id="state" type="text" class="partner-input" placeholder="e.g., Maharashtra" required>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 2: Work & Skills -->
+        <div class="form-section">
+          <h3 class="section-title">2. Professional Information</h3>
+          <div class="form-grid">
+            <div class="partner-input-group">
+              <label for="skill">Primary Skill</label>
+              <div class="input-wrapper">
+                <span class="input-icon">🛠️</span>
+                <select id="skill" class="partner-input" required style="padding-left: 45px;">
+                  <option value="">Choose your primary skill</option>
+                  <option value="electrician">Professional Electrician</option>
+                  <option value="medical">Medical First Responder</option>
+                  <option value="logistics">Logistics & Transport</option>
+                  <option value="grocery">Essential Delivery</option>
+                  <option value="plumbing">Plumbing Services</option>
+                  <option value="education">Educational Support</option>
+                </select>
+              </div>
+            </div>
+            <div class="partner-input-group">
+              <label for="experience">Experience Level</label>
+              <div class="input-wrapper">
+                <span class="input-icon">🏆</span>
+                <select id="experience" class="partner-input" required style="padding-left: 45px;">
+                  <option value="beginner">Beginner (0-1 Years)</option>
+                  <option value="intermediate">Intermediate (1-3 Years)</option>
+                  <option value="professional">Professional (3+ Years)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="partner-input-group">
+            <label for="availability">Availability Schedule</label>
+            <div class="input-wrapper">
+              <span class="input-icon">⏰</span>
+              <select id="availability" class="partner-input" required style="padding-left: 45px;">
+                <option value="full-time">Full-time (All Day)</option>
+                <option value="part-time">Part-time (Evenings/Weekends)</option>
+                <option value="occasional">On-Call (Emergency Only)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 3: Document Verification (Simulation) -->
+        <div class="form-section">
+          <h3 class="section-title">3. Document Verification</h3>
+          <p class="section-hint">Upload high-quality photos of your documents for faster verification.</p>
+
+          <div class="partner-input-group">
+            <label for="id-number">Aadhar / Voter ID Number</label>
+            <input id="id-number" type="text" class="partner-input" placeholder="Enter your 12-digit ID number"
+              required>
+          </div>
+
+          <div class="document-upload-grid">
+            <div class="doc-upload-wrapper">
+              <div id="id-front-container" class="doc-upload-box" onclick="showActionMenu('id-front')">
+                <img id="id-front-preview" class="doc-thumbnail" src="#" alt="Front">
+                <div class="doc-icon">🪪</div>
+                <div class="doc-label">ID Proof (Front)</div>
+                <div id="id-front-status" class="doc-status">Click to upload</div>
+                <input type="file" id="id-front-input" hidden accept="image/*"
+                  onchange="handleFileUpload(this, 'id-front-preview', 'doc-icon', 'id-front-status')">
+                <input type="file" id="id-front-camera" hidden accept="image/*" capture="camera"
+                  onchange="handleFileUpload(this, 'id-front-preview', 'doc-icon', 'id-front-status')">
+              </div>
+              <div class="photo-controls">
+                <span class="photo-btn btn-edit" onclick="showActionMenu('id-front')">Change</span>
+                <span class="photo-btn btn-delete"
+                  onclick="removeUploadedPhoto('id-front-input', 'id-front-preview', 'id-front-status', 'id-front-container', 'doc-icon', 'Click to upload')">Delete</span>
+              </div>
+            </div>
+
+            <div class="doc-upload-wrapper">
+              <div id="id-back-container" class="doc-upload-box" onclick="showActionMenu('id-back')">
+                <img id="id-back-preview" class="doc-thumbnail" src="#" alt="Back">
+                <div class="doc-icon">🪪</div>
+                <div class="doc-label">ID Proof (Back)</div>
+                <div id="id-back-status" class="doc-status">Click to upload</div>
+                <input type="file" id="id-back-input" hidden accept="image/*"
+                  onchange="handleFileUpload(this, 'id-back-preview', 'doc-icon', 'id-back-status')">
+                <input type="file" id="id-back-camera" hidden accept="image/*" capture="camera"
+                  onchange="handleFileUpload(this, 'id-back-preview', 'doc-icon', 'id-back-status')">
+              </div>
+              <div class="photo-controls">
+                <span class="photo-btn btn-edit" onclick="showActionMenu('id-back')">Change</span>
+                <span class="photo-btn btn-delete"
+                  onclick="removeUploadedPhoto('id-back-input', 'id-back-preview', 'id-back-status', 'id-back-container', 'doc-icon', 'Click to upload')">Delete</span>
+              </div>
+            </div>
+
+            <div class="doc-upload-wrapper">
+              <div id="cert-container" class="doc-upload-box" onclick="showActionMenu('cert')">
+                <img id="cert-preview" class="doc-thumbnail" src="#" alt="Cert">
+                <div class="doc-icon">📜</div>
+                <div class="doc-label">Skill Certificate</div>
+                <div id="cert-status" class="doc-status">Click to upload</div>
+                <input type="file" id="cert-input" hidden accept="image/*"
+                  onchange="handleFileUpload(this, 'cert-preview', 'doc-icon', 'cert-status')">
+                <input type="file" id="cert-camera" hidden accept="image/*" capture="camera"
+                  onchange="handleFileUpload(this, 'cert-preview', 'doc-icon', 'cert-status')">
+              </div>
+              <div class="photo-controls">
+                <span class="photo-btn btn-edit" onclick="showActionMenu('cert')">Change</span>
+                <span class="photo-btn btn-delete"
+                  onclick="removeUploadedPhoto('cert-input', 'cert-preview', 'cert-status', 'cert-container', 'doc-icon', 'Click to upload')">Delete</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="partner-submit-btn">Apply Now as Partner</button>
+        <p class="terms-text">By clicking "Apply Now", you agree to Community Care's <a href="#">Partner Terms of
+            Service</a> and <a href="#">Privacy Policy</a>.</p>
+      </form>
+    </section>
+  </main>
+
+
+  <div id="photo-action-overlay" class="action-menu-overlay" onclick="hideActionMenu()">
+    <div class="action-menu" onclick="event.stopPropagation()">
+      <div class="action-menu-title">Photo Options</div>
+
+      <div class="action-option" onclick="handleMenuSelection('gallery')">
+        <div class="action-option-icon">🖼️</div>
+        <div class="action-option-text">Choose from Gallery</div>
+      </div>
+
+      <div class="action-option" onclick="handleMenuSelection('camera')">
+        <div class="action-option-icon">📸</div>
+        <div class="action-option-text">Camera / Take Photo</div>
+      </div>
+
+      <div class="action-option" onclick="handleMenuSelection('whatsapp')">
+        <div class="action-option-icon" style="background: #e8f5e9; color: #25d366;">💬</div>
+        <div class="action-option-text">
+          Import from WhatsApp
+          <span id="menu-whatsapp-number" style="display: block; font-size: 10px; color: #888; margin-top: 2px;">No
+            number
+            provided</span>
+        </div>
+      </div>
+
+
+
+      <div id="menu-remove-option" class="action-option remove" onclick="handleMenuSelection('remove')">
+        <div class="action-option-icon">🗑️</div>
+        <div class="action-option-text">Delete Photo</div>
+      </div>
+
+      <div class="action-cancel" onclick="hideActionMenu()">Cancel</div>
+    </div>
+  </div>
+
+  <!-- Webcam Modal -->
+  <div id="webcam-modal" class="webcam-modal-overlay">
+    <div class="webcam-container" id="webcam-container">
+      <video id="webcam-video" autoplay playsinline></video>
+      <div class="webcam-frame-guide"></div>
+      <canvas id="webcam-canvas"></canvas>
+    </div>
+    <div class="webcam-controls">
+      <button class="webcam-btn btn-close-webcam" onclick="stopWebcam()">Cancel</button>
+      <button class="webcam-btn btn-capture" onclick="capturePhoto()">📸 Capture Photo</button>
+    </div>
+  </div>
+
+  <!-- WhatsApp Import Modal -->
+  <div id="whatsapp-modal" class="whatsapp-modal-overlay">
+    <div class="whatsapp-container">
+      <div class="whatsapp-header">
+        <div style="font-size: 24px;">💬</div>
+        <div class="whatsapp-header-text">
+          <h4>WhatsApp Media</h4>
+          <p id="wa-header-status">Checking connection...</p>
+        </div>
+      </div>
+      <div class="whatsapp-content">
+        <div id="wa-connecting-view" class="whatsapp-connecting">
+          <div class="whatsapp-spinner"></div>
+          <p style="font-size: 14px; color: #555;">Linking with <span id="wa-linked-number">...</span><br>Syncing recent
+            media...</p>
+        </div>
+        <div id="wa-ready-view"
+          style="display:none; flex-direction:column; align-items:center; gap:15px; padding: 20px 0; text-align: center;">
+          <div style="font-size: 48px;">✅</div>
+          <p style="font-size: 14px; color: #333; font-weight: 600; margin: 0;">WhatsApp Linked!</p>
+          <p style="font-size: 12px; color: #666; margin: 0;">Tap below to choose photos from your WhatsApp media
+            gallery.</p>
+          <label for="wa-file-picker"
+            style="background: #25d366; color: white; padding: 12px 25px; border-radius: 25px; cursor: pointer; font-size: 14px; font-weight: 600; display: inline-block;">
+            📂 Browse WhatsApp Photos
+          </label>
+          <input type="file" id="wa-file-picker" hidden accept="image/*" multiple onchange="loadWhatsappPhotos(this)">
+          <p style="font-size: 10px; color: #aaa;">Navigate to: WhatsApp → Media → WhatsApp Images</p>
+        </div>
+        <div id="wa-gallery-view" class="whatsapp-gallery">
+          <!-- Media items will be injected here -->
+        </div>
+      </div>
+      <div class="whatsapp-footer">
+        <span class="wa-cancel-btn" onclick="closeWhatsappModal()">Cancel Import</span>
+      </div>
+    </div>
+  </div>
+
+  <footer style="padding: 40px 20px; text-align: center; background: white; border-top: 1px solid #eee;">
+    <p style="color: #666;">&copy; 2026 Community Care Partner Network. All rights reserved.</p>
+  </footer>
+
+  <script src="../js/script.js"></script>
+
+  <script type="module">
+    import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+    import { db } from "../js/firebase-init.js";
+
+    let currentMenuField = null;
+
+    // Base64 storage for the 4 required documents
+    let profileDocBase64 = null;
+    let idFrontDocBase64 = null;
+    let idBackDocBase64 = null;
+    let certDocBase64 = null;
+
+    function setBase64Value(fieldId, dataUrl) {
+      if (fieldId === 'profile') profileDocBase64 = dataUrl;
+      else if (fieldId === 'id-front') idFrontDocBase64 = dataUrl;
+      else if (fieldId === 'id-back') idBackDocBase64 = dataUrl;
+      else if (fieldId === 'cert') certDocBase64 = dataUrl;
+    }
+
+    window.showActionMenu = function (fieldType) {
+      currentMenuField = fieldType;
+      const overlay = document.getElementById('photo-action-overlay');
+      const containerId = fieldType === 'profile' ? 'profile-container' : fieldType + '-container';
+      const container = document.getElementById(containerId);
+      const isUploaded = container.classList.contains('uploaded');
+
+      // Update WhatsApp number in menu
+      const whatsappVal = document.getElementById('whatsapp').value;
+      const menuWhatsappText = document.getElementById('menu-whatsapp-number');
+      if (whatsappVal) {
+        menuWhatsappText.innerText = "Linked: " + whatsappVal;
+        menuWhatsappText.style.color = "#25d366";
+      } else {
+        menuWhatsappText.innerText = "No number provided";
+        menuWhatsappText.style.color = "#888";
+      }
+
+      document.getElementById('menu-remove-option').style.display = isUploaded ? 'flex' : 'none';
+
+      overlay.style.display = 'flex';
+      setTimeout(() => overlay.classList.add('active'), 10);
+    }
+
+    window.hideActionMenu = function () {
+      const overlay = document.getElementById('photo-action-overlay');
+      overlay.classList.remove('active');
+      setTimeout(() => overlay.style.display = 'none', 300);
+    }
+
+    window.handleMenuSelection = function (action) {
+      hideActionMenu();
+      if (action === 'gallery') {
+        document.getElementById(currentMenuField + '-input').click();
+      } else if (action === 'camera') {
+        startWebcam();
+      } else if (action === 'whatsapp') {
+        simulateWhatsappImport();
+
+      } else if (action === 'remove') {
+        if (currentMenuField === 'profile') {
+          removeUploadedPhoto('profile-input', 'profile-preview', 'profile-status', 'profile-container', 'profile-icon', 'Passport size preferred');
+        } else {
+          removeUploadedPhoto(currentMenuField + '-input', currentMenuField + '-preview', currentMenuField + '-status', currentMenuField + '-container', 'doc-icon', 'Click to upload');
+        }
+      }
+    }
+
+    let webcamStream = null;
+
+    window.startWebcam = async function () {
+      const modal = document.getElementById('webcam-modal');
+      const video = document.getElementById('webcam-video');
+      const webcamContainer = document.getElementById('webcam-container');
+
+      if (currentMenuField === 'profile') {
+        webcamContainer.classList.add('is-profile-capture');
+      } else {
+        webcamContainer.classList.remove('is-profile-capture');
+      }
+
+      try {
+        webcamStream = await navigator.mediaDevices.getUserMedia({
+          video: { facingMode: currentMenuField === 'profile' ? 'user' : 'environment' },
+          audio: false
+        });
+        video.srcObject = webcamStream;
+        modal.style.display = 'flex';
+      } catch (err) {
+        alert("Camera access denied or not available: " + err.message);
+        // Fallback to native camera input
+        const cameraInput = document.getElementById(currentMenuField + '-camera');
+        if (cameraInput) cameraInput.click();
+      }
+    }
+
+    window.startWebcamDirectly = function (fieldType) {
+      currentMenuField = fieldType;
+      startWebcam();
+    }
+
+    window.stopWebcam = function () {
+      const modal = document.getElementById('webcam-modal');
+      const video = document.getElementById('webcam-video');
+
+      if (webcamStream) {
+        webcamStream.getTracks().forEach(track => track.stop());
+        webcamStream = null;
+      }
+      video.srcObject = null;
+      modal.style.display = 'none';
+    }
+
+    window.capturePhoto = function () {
+      const video = document.getElementById('webcam-video');
+      const canvas = document.getElementById('webcam-canvas');
+      const previewId = currentMenuField === 'profile' ? 'profile-preview' : currentMenuField + '-preview';
+      const statusId = currentMenuField === 'profile' ? 'profile-status' : currentMenuField + '-status';
+      const iconClass = currentMenuField === 'profile' ? 'profile-icon' : 'doc-icon';
+      const containerId = currentMenuField === 'profile' ? 'profile-container' : currentMenuField + '-container';
+
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      const context = canvas.getContext('2d');
+
+      // Handle mirroring for front camera
+      if (currentMenuField === 'profile') {
+        context.translate(canvas.width, 0);
+        context.scale(-1, 1);
+      }
+
+      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+      const dataUrl = canvas.toDataURL('image/jpeg');
+      const preview = document.getElementById(previewId);
+      const status = document.getElementById(statusId);
+      const container = document.getElementById(containerId);
+      const icon = container.querySelector('.' + iconClass);
+      const cameraBadge = container.querySelector('.camera-badge');
+
+      preview.src = dataUrl;
+      container.classList.add('uploaded');
+      if (icon) icon.style.display = 'none';
+      if (cameraBadge) cameraBadge.style.display = 'none';
+      const labelInner = container.querySelector('.profile-label-inner');
+      if (labelInner) labelInner.style.display = 'none';
+
+      if (status) {
+        status.innerText = "✅ Captured";
+        status.style.color = "#2e7d32";
+      }
+
+      // Assign Base64 variable
+      setBase64Value(currentMenuField, dataUrl);
+
+      stopWebcam();
+    }
+
+    window.copyPhoneToWhatsapp = function () {
+      const phoneInput = document.getElementById('phone');
+      const whatsappInput = document.getElementById('whatsapp');
+      const checkbox = document.getElementById('same-as-phone');
+
+      checkbox.checked = !checkbox.checked;
+
+      if (checkbox.checked) {
+        whatsappInput.value = phoneInput.value;
+      }
+    }
+
+    window.simulateWhatsappImport = function () {
+      const whatsappVal = document.getElementById('whatsapp').value;
+      const modal = document.getElementById('whatsapp-modal');
+      const connectingView = document.getElementById('wa-connecting-view');
+      const galleryView = document.getElementById('wa-gallery-view');
+      const linkedNum = document.getElementById('wa-linked-number');
+      const headerStatus = document.getElementById('wa-header-status');
+
+      if (!whatsappVal) {
+        alert("Please enter your WhatsApp number first so we can link your account.");
+        return;
+      }
+
+      linkedNum.innerText = whatsappVal;
+      headerStatus.innerText = "Connecting...";
+      connectingView.style.display = 'flex';
+      document.getElementById('wa-ready-view').style.display = 'none';
+      galleryView.style.display = 'none';
+      modal.style.display = 'flex';
+
+      // Phase 1: Simulate connection
+      setTimeout(() => {
+        headerStatus.innerText = "Online ✓";
+        connectingView.style.display = 'none';
+
+        // Check if user already loaded photos
+        const galleryView2 = document.getElementById('wa-gallery-view');
+        if (galleryView2.childElementCount > 0) {
+          galleryView2.style.display = 'grid';
+        } else {
+          document.getElementById('wa-ready-view').style.display = 'flex';
+        }
+      }, 2000);
+    }
+
+    window.closeWhatsappModal = function () {
+      document.getElementById('whatsapp-modal').style.display = 'none';
+    }
+
+    window.loadWhatsappPhotos = function (input) {
+      const galleryView = document.getElementById('wa-gallery-view');
+      const readyView = document.getElementById('wa-ready-view');
+
+      if (!input.files || input.files.length === 0) return;
+
+      readyView.style.display = 'none';
+      galleryView.style.display = 'grid';
+      galleryView.innerHTML = '';
+
+      Array.from(input.files).forEach(file => {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          const div = document.createElement('div');
+          div.className = 'whatsapp-media-item';
+          div.innerHTML = `<img src="${e.target.result}" alt="WA Media">`;
+          div.onclick = () => selectWhatsappMedia(e.target.result);
+          galleryView.appendChild(div);
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    window.selectWhatsappMedia = function (dataUrl) {
+      const previewId = currentMenuField === 'profile' ? 'profile-preview' : currentMenuField + '-preview';
+      const statusId = currentMenuField === 'profile' ? 'profile-status' : currentMenuField + '-status';
+      const iconClass = currentMenuField === 'profile' ? 'profile-icon' : 'doc-icon';
+      const containerId = currentMenuField === 'profile' ? 'profile-container' : currentMenuField + '-container';
+
+      const preview = document.getElementById(previewId);
+      const status = document.getElementById(statusId);
+      const container = document.getElementById(containerId);
+      const icon = container.querySelector('.' + iconClass);
+      const cameraBadge = container.querySelector('.camera-badge');
+
+      preview.src = dataUrl;
+      container.classList.add('uploaded');
+      if (icon) icon.style.display = 'none';
+      if (cameraBadge) cameraBadge.style.display = 'none';
+      const labelInner = container.querySelector('.profile-label-inner');
+      if (labelInner) labelInner.style.display = 'none';
+
+      if (status) {
+        status.innerText = "✅ Imported from WhatsApp";
+        status.style.color = "#2e7d32";
+      }
+
+      // Assign Base64 variable
+      setBase64Value(currentMenuField, dataUrl);
+
+      closeWhatsappModal();
+    }
+
+    window.handleFileUpload = function (input, previewId, iconClass, statusId) {
+      const file = input.files[0];
+      if (!file) return;
+
+      const preview = document.getElementById(previewId);
+      const status = document.getElementById(statusId);
+      const container = input.parentElement;
+      const icon = container.querySelector('.' + iconClass);
+      const cameraBadge = container.querySelector('.camera-badge');
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        preview.src = e.target.result;
+
+        // Assign Base64 variable based on input ID
+        const fieldId = input.id.replace('-input', '').replace('-camera', '');
+        setBase64Value(fieldId, e.target.result);
+
+        container.classList.add('uploaded');
+        if (icon) icon.style.display = 'none';
+        if (cameraBadge) cameraBadge.style.display = 'none';
+        const labelInner = container.querySelector('.profile-label-inner');
+        if (labelInner) labelInner.style.display = 'none';
+        if (status) {
+          status.innerText = "✅ Selected";
+          status.style.color = "#2e7d32";
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+
+    window.removeUploadedPhoto = function (inputId, previewId, statusId, containerId, iconClass, defaultStatus) {
+      // Clear Base64 variable
+      const fieldId = inputId.replace('-input', '');
+      setBase64Value(fieldId, null);
+
+      const input = document.getElementById(inputId);
+      const preview = document.getElementById(previewId);
+      const status = document.getElementById(statusId);
+      const container = document.getElementById(containerId);
+      const icon = container.querySelector('.' + iconClass);
+      const cameraBadge = container.querySelector('.camera-badge');
+      const labelInner = container.querySelector('.profile-label-inner');
+
+      input.value = "";
+      preview.src = "#";
+      container.classList.remove('uploaded');
+      if (icon) icon.style.display = 'block';
+      if (cameraBadge) cameraBadge.style.display = 'flex';
+      if (labelInner) labelInner.style.display = 'block';
+      if (status) {
+        status.innerText = defaultStatus;
+        status.style.color = "#999";
+      }
+    }
+
+    window.registerPartner = function (event) {
+      event.preventDefault();
+
+      const name = document.getElementById("name").value;
+      const fatherName = document.getElementById("father-name").value;
+      const dob = document.getElementById("dob").value;
+      const bloodGroup = document.getElementById("blood-group").value;
+      const email = document.getElementById("email").value;
+      const phone = document.getElementById("phone").value;
+      const altPhone = document.getElementById("alt-phone").value;
+      const fullAddress = document.getElementById("address").value;
+      const city = document.getElementById("city").value;
+      const state = document.getElementById("state").value;
+      const pincode = document.getElementById("pincode").value;
+      const gender = document.getElementById("gender").value;
+
+      const whatsapp = document.getElementById("whatsapp").value;
+      const idNumber = document.getElementById("id-number").value;
+      const skill = document.getElementById("skill").value;
+      const experience = document.getElementById("experience").value;
+      const availability = document.getElementById("availability").value;
+
+      // Ensure documents are attached
+      if (!profileDocBase64 || !idFrontDocBase64 || !idBackDocBase64 || !certDocBase64) {
+        alert("Please attach all required photos: Profile, ID (Front & Back), and Skill Certificate.");
+        return;
+      }
+
+      addDoc(collection(db, "partners"), {
+        name: name,
+        fatherName: fatherName,
+        dob: dob,
+        bloodGroup: bloodGroup,
+        email: email,
+        phone: phone,
+        whatsapp: whatsapp,
+        altPhone: altPhone,
+        address: {
+          full: fullAddress,
+          city: city,
+          state: state,
+          pincode: pincode
+        },
+        idNumber: idNumber,
+        gender: gender,
+        service: skill,
+        experience: experience,
+        availability: availability,
+        documents: {
+          profilePic: profileDocBase64,
+          idFront: idFrontDocBase64,
+          idBack: idBackDocBase64,
+          certificate: certDocBase64
+        },
+        status: "pending",
+        registeredAt: new Date()
+      })
+        .then(() => {
+          alert("Application Submitted! Thank you, " + name + ". Your profile is now being reviewed by our verification team. We will contact you via email shortly.");
+          event.target.reset();
+
+          // Clear Base64 data securely
+          profileDocBase64 = null;
+          idFrontDocBase64 = null;
+          idBackDocBase64 = null;
+          certDocBase64 = null;
+
+          document.querySelectorAll('.doc-upload-box, .profile-upload-circle').forEach(box => {
+            box.classList.remove('uploaded');
+            const status = box.querySelector('.doc-status');
+            const icon = box.querySelector('.doc-icon') || box.querySelector('.profile-icon');
+            const preview = box.querySelector('img');
+            if (status) {
+              status.innerText = box.classList.contains('profile-upload-circle') ? "Passport size preferred" : "Click to upload";
+              status.style.color = "#999";
+            }
+            if (icon) icon.style.display = 'block';
+            const cameraBadge = box.querySelector('.camera-badge');
+            if (cameraBadge) cameraBadge.style.display = 'flex';
+            const labelInner = box.querySelector('.profile-label-inner');
+            if (labelInner) labelInner.style.display = 'block';
+            if (preview) preview.src = "#";
+            box.style.borderColor = "";
+            box.style.background = "";
+          });
+        })
+        .catch(err => alert("Registration Error: " + err.message));
+    }
+  </script>
+</body>
+
+</html>

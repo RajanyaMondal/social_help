@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Community Care</title>
+
+  <link rel="stylesheet" href="../css/style.css">
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+</head>
+
+<body>
+
+  <div class="top-bar">
+    <div class="top-bar-left">
+      <!-- Global Location Pill (Zomato Style) -->
+      <div id="global-location-pill" class="location-pill" onclick="fetchGlobalLocation()"
+        title="Click to update location">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+        </svg>
+        <span id="global-location-text">Fetching...</span>
+      </div>
+
+      <div style="width: 1px; height: 16px; background: rgba(255,255,255,0.3); margin: 0 5px;"></div>
+
+      <a href="mailto:raimondal636@gmail.com" class="top-bar-icon" title="Email: raimondal636@gmail.com">📧</a>
+      <a href="tel:9007009725" class="top-bar-icon" title="Phone: 9007009725">📞</a>
+      <div class="top-bar-social" aria-label="Social links">
+        <a href="#" class="top-bar-icon" title="Instagram" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path
+              d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 2A3.75 3.75 0 0 0 4 7.75v8.5A3.75 3.75 0 0 0 7.75 20h8.5A3.75 3.75 0 0 0 20 16.25v-8.5A3.75 3.75 0 0 0 16.25 4h-8.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.75-.9a1.15 1.15 0 1 1 0 2.3 1.15 1.15 0 0 1 0-2.3Z" />
+          </svg>
+        </a>
+        <a href="#" class="top-bar-icon" title="Twitter" aria-label="Twitter">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path
+              d="M18.9 2h3.1l-6.77 7.74L23 22h-6.2l-4.86-6.27L6.45 22H3.3l7.24-8.27L1 2h6.35l4.39 5.57L18.9 2Zm-1.09 18h1.72L6.41 3.9H4.57L17.81 20Z" />
+          </svg>
+        </a>
+        <a href="#" class="top-bar-icon" title="YouTube" aria-label="YouTube">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path
+              d="M21.6 7.2a3 3 0 0 0-2.1-2.1C17.6 4.5 12 4.5 12 4.5s-5.6 0-7.5.6A3 3 0 0 0 2.4 7.2 31.5 31.5 0 0 0 2 12a31.5 31.5 0 0 0 .4 4.8 3 3 0 0 0 2.1 2.1c1.9.6 7.5.6 7.5.6s5.6 0 7.5-.6a3 3 0 0 0 2.1-2.1A31.5 31.5 0 0 0 22 12a31.5 31.5 0 0 0-.4-4.8ZM10 15.5v-7l6 3.5-6 3.5Z" />
+          </svg>
+        </a>
+        <a href="#" class="top-bar-icon" title="Facebook" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path
+              d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.9.3-1.5 1.6-1.5h1.7V5c-.8-.1-1.7-.2-2.6-.2-2.6 0-4.4 1.6-4.4 4.5V11H7v3h2.8v8h3.7Z" />
+          </svg>
+        </a>
+      </div>
+    </div>
+    <div class="top-bar-right" id="auth-bar">
+      <a href="login.html" class="top-bar-link">Login</a>
+      <a href="register.html" class="top-bar-link top-bar-link--primary">Sign Up</a>
+    </div>
+  </div>
+  <header>
+    <div class="header-images">
+      <img src="hand.jpeg" alt="Hand Icon" class="hand-icon">
+    </div>
+    <div class="header-title">
+      <div class="title-row">
+        <h1>Community<br>Care</h1>
+        <div class="header-links" aria-label="Header navigation">
+          <a class="header-link" href="index.html">Home</a>
+          <a class="header-link" href="#our-model">Our Model</a>
+          <a class="header-link" href="#our-impact">Our Impact</a>
+          <a class="header-link" href="#about-us">About Us</a>
+          <a class="header-link" href="#why-work-with-us">Why Work With Us</a>
+          <a class="header-link" href="#resources">Resources</a>
+          <a class="header-link donate-link" href="donate.html"
+            style="display: inline-flex; align-items: center; gap: 6px;">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+              <path
+                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+            </svg>
+            Donate
+          </a>
+        </div>
+      </div>
+      <p>Helping children, elderly and people in need</p>
+    </div>
+    <button class="menu-btn" onclick="toggleSidebar(true)">☰</button>
+  </header>
+
+  <!-- Mobile Sidebar Overlay & Menu -->
+  <div class="mobile-menu-overlay" id="menuOverlay" onclick="toggleSidebar(false)"></div>
+  <div class="mobile-sidebar" id="mobileSidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-title">Menu</div>
+      <div class="close-sidebar" onclick="toggleSidebar(false)">✕</div>
+    </div>
+    <div class="sidebar-body">
+      <a href="index.html" class="sidebar-link active">Home</a>
+      <a href="#our-model" class="sidebar-link" onclick="toggleSidebar(false)">Our Model</a>
+      <a href="#our-impact" class="sidebar-link" onclick="toggleSidebar(false)">Our Impact</a>
+      <a href="#about-us" class="sidebar-link" onclick="toggleSidebar(false)">About Us</a>
+      <a href="#why-work-with-us" class="sidebar-link" onclick="toggleSidebar(false)">Why Work With Us</a>
+      <a href="#resources" class="sidebar-link" onclick="toggleSidebar(false)">Resources</a>
+      <a href="login.html" class="sidebar-link">Login</a>
+      <a href="register.html" class="sidebar-link">Sign Up</a>
+    </div>
+    <div class="sidebar-footer">
+      <a href="donate.html" class="sidebar-donate-btn">Donate Now</a>
+    </div>
+  </div>
+
+  <section class="hero" id="our-model">
+    <img src="cover.jpeg" alt="Community Care" class="hero-cover">
+    <div class="hero-content">
+      <h2>Together We Can Help People</h2>
+      <p>
+        Electricity • Water • Medicine • Ambulance • Grocery
+      </p>
+      <div class="hero-btns">
+        <a href="request.html">
+          <button class="btn">Request Help</button>
+        </a>
+        <a href="volunteer.html">
+          <button class="btn">Become a Volunteer</button>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="services" id="our-impact">
+
+    <div class="services-header">
+      <h2>How We Help</h2>
+      <p>Choose a service to request support or make a difference today.</p>
+    </div>
+
+    <div class="services-grid">
+
+      <!-- Electricity -->
+      <a href="request.html?service=electricity" class="service-card has-cover">
+        <img src="elec.jpeg" alt="Electricity Help" class="service-cover">
+        <div class="service-content">
+          <h3>Electricity Help</h3>
+          <p>Assistance with power bills and basic electrical access for remote areas.</p>
+        </div>
+      </a>
+
+      <!-- Water -->
+      <a href="request.html?service=water" class="service-card has-cover">
+        <img src="water.jpeg" alt="Clean Water" class="service-cover">
+        <div class="service-content">
+          <h3>Clean Water</h3>
+          <p>Providing water pumps and clean drinking water to communities in need.</p>
+        </div>
+      </a>
+
+      <!-- Healthcare -->
+      <a href="request.html?service=medicine" class="service-card has-cover">
+        <img src="medicine.jpeg" alt="Medicine & Health" class="service-cover">
+        <div class="service-content">
+          <h3>Medicine & Health</h3>
+          <p>Funding critical medical supplies and community healthcare programs.</p>
+        </div>
+      </a>
+
+      <!-- Ambulance -->
+      <a href="request.html?service=ambulance" class="service-card has-cover">
+        <img src="amb.jpeg" alt="Ambulance" class="service-cover">
+        <div class="service-content">
+          <h3>Ambulance</h3>
+          <p>Emergency transport services for critical and immediate medical care.</p>
+        </div>
+      </a>
+
+      <!-- Grocery -->
+      <a href="request.html?service=grocery" class="service-card has-cover">
+        <img src="food.jpeg" alt="Food & Groceries" class="service-cover">
+        <div class="service-content">
+          <h3>Food & Groceries</h3>
+          <p>Delivering essential nutritional supplies to families facing food insecurity.</p>
+        </div>
+      </a>
+
+      <!-- Children Education -->
+      <a href="request.html?service=children" class="service-card has-cover">
+        <img src="child.jpeg" alt="Children Education" class="service-cover">
+        <div class="service-content">
+          <h3>Children Education</h3>
+          <p>Empowering the next generation with school supplies and tutoring.</p>
+        </div>
+      </a>
+
+      <!-- Elder Care -->
+      <a href="request.html?service=elderly" class="service-card has-cover">
+        <img src="elder.jpeg" alt="Elderly Care" class="service-cover">
+        <div class="service-content">
+          <h3>Elderly Care</h3>
+          <p>Supportive services, companionships, and care for senior citizens.</p>
+        </div>
+      </a>
+
+      <!-- Disaster Response -->
+      <a href="request.html?service=disaster" class="service-card has-cover">
+        <img src="help.jpeg" alt="Disaster Response" class="service-cover">
+        <div class="service-content">
+          <h3>Disaster Response</h3>
+          <p>Immediate relief including food, shelter, and medical aid during crises.</p>
+        </div>
+      </a>
+
+      <!-- Volunteer -->
+      <a href="volunteer.html" class="service-card volunteer-card has-cover">
+        <img src="v.jpeg" alt="Become a Volunteer" class="service-cover">
+        <div class="service-content">
+          <h3>Become a Volunteer</h3>
+          <p>Join our community. Your time and passion can change lives forever.</p>
+        </div>
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <section class="partnerships" id="why-work-with-us">
+    <div class="partners-header">
+      <h2>Our Trusted Partners</h2>
+      <p>We collaborate with top organizations and companies to deliver aid where it's needed most.</p>
+    </div>
+
+    <div class="partners-marquee">
+      <div class="partners-track">
+
+        <div class="partner-card">
+          <img src="red.jpeg" alt="Red Cross" class="partner-logo">
+          <p>Global Red Cross</p>
+        </div>
+
+        <div class="partner-card">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/WHO_logo.svg/200px-WHO_logo.svg.png"
+            alt="WHO" class="partner-logo">
+          <p>World Health Org</p>
+        </div>
+
+        <div class="partner-card">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/en/thumb/9/90/The_World_Food_Programme_logo.svg/200px-The_World_Food_Programme_logo.svg.png"
+            alt="WFP" class="partner-logo">
+          <p>World Food Programme</p>
+        </div>
+
+        <div class="partner-card">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/200px-Microsoft_logo.svg.png"
+            alt="Microsoft" class="partner-logo">
+          <p>Microsoft Philanthropies</p>
+        </div>
+
+        <div class="partner-card">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/200px-Google_2015_logo.svg.png"
+            alt="Google" class="partner-logo">
+          <p>Google.org</p>
+        </div>
+
+        <div class="partner-card">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/200px-Amazon_logo.svg.png"
+            alt="Amazon" class="partner-logo">
+          <p>Amazon Smile</p>
+        </div>
+
+        <div class="partner-card">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/en/thumb/8/87/Bill_%26_Melinda_Gates_Foundation_logo.svg/250px-Bill_%26_Melinda_Gates_Foundation_logo.svg.png"
+            alt="Gates Foundation" class="partner-logo">
+          <p>Gates Foundation</p>
+        </div>
+
+        <div class="partner-card">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/200px-Apple_logo_black.svg.png"
+            alt="Apple" class="partner-logo">
+          <p>Apple Connect</p>
+        </div>
+
+        <div class="partner-card">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/FedEx_Express.svg/200px-FedEx_Express.svg.png"
+            alt="FedEx" class="partner-logo">
+          <p>FedEx Cares</p>
+        </div>
+
+        <div class="partner-card">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/UN_emblem_blue.svg/200px-UN_emblem_blue.svg.png"
+            alt="UN" class="partner-logo">
+          <p>United Nations</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="newsletter-section">
+    <div class="newsletter-container">
+      <h3 class="newsletter-title">Subscribe To Our Newsletter</h3>
+      <form class="newsletter-form">
+        <input type="email" placeholder="Enter your email" required class="newsletter-input">
+        <button type="submit" class="newsletter-btn">SUBSCRIBE</button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="complex-footer" id="about-us">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+          <img src="hand.jpeg" alt="Community Care" style="height: 60px; border-radius: 8px;">
+          <div style="line-height: 1.1;">
+            <strong style="font-size: 20px; color: #2e7d32;">COMMUNITY</strong><br>
+            <strong style="font-size: 20px; color: #8bc34a;">CARE</strong>
+          </div>
+        </div>
+        <a href="donate.html"><button class="btn btn--green"
+            style="font-weight:bold; border-radius: 30px; padding: 12px 30px; border:none; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">DONATE</button></a>
+        <p style="margin-top: 40px; font-size: 13px; color: #555;">© 2026 Community Care. All Rights Reserved</p>
+      </div>
+
+      <div class="footer-column">
+        <h4>CONTACT</h4>
+        <p>Community Care Initiatives<br>123, Hope Street, Care Building<br>City Center - 100001</p>
+        <p style="margin-top: 15px; display: flex; align-items: center; gap: 10px;">
+          <a href="tel:9007009725" style="color:#555; text-decoration:none;">📞 9007009725</a>
+        </p>
+        <p style="margin-top: 20px;">
+          <a href="mailto:raimondal636@gmail.com" class="btn btn--green"
+            style="display:inline-block; font-weight:bold; border-radius:30px; padding:10px 20px; text-decoration:none;">
+            📧 Send an Email
+          </a>
+        </p>
+      </div>
+
+      <div class="footer-column">
+        <h4>MENU</h4>
+        <a href="#our-model">Our Model</a>
+        <a href="#our-impact">Our Impact</a>
+        <a href="#about-us">About Us</a>
+        <a href="#why-work-with-us">Why Work With Us</a>
+        <a href="#resources">Resources</a>
+        <a href="#">Blog</a>
+      </div>
+
+      <div class="footer-column">
+        <h4>FOLLOW US</h4>
+        <a href="#">Facebook</a>
+        <a href="#">Twitter</a>
+        <a href="#">Instagram</a>
+        <a href="#">LinkedIn</a>
+        <a href="#">YouTube</a>
+      </div>
+
+      <div class="footer-column">
+        <h4>LEGAL</h4>
+        <a href="#">Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
+
+
+  <button class="sos" onclick="sendSOS()">🚨 EMERGENCY HELP</button>
+
+  <script>
+    // Sidebar Toggle Logic
+    function toggleSidebar(open) {
+      const sidebar = document.getElementById('mobileSidebar');
+      const overlay = document.getElementById('menuOverlay');
+      if (open) {
+        overlay.classList.add('active');
+        sidebar.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent scroll
+      } else {
+        overlay.classList.remove('active');
+        sidebar.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+
+    // Zomato-style Global Location Logic
+    async function fetchGlobalLocation() {
+      const textEl = document.getElementById('global-location-text');
+      textEl.innerText = "Locating...";
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(async (pos) => {
+          const lat = pos.coords.latitude;
+          const lon = pos.coords.longitude;
+          try {
+            const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&addressdetails=1`);
+            const data = await res.json();
+
+            if (data && data.address) {
+              // Extract the most relevant specific localized area (like Zomato)
+              const localizedAddress =
+                data.address.neighbourhood ||
+                data.address.suburb ||
+                data.address.city_district ||
+                data.address.city ||
+                data.address.town ||
+                "Unknown area";
+
+              textEl.innerText = `${localizedAddress} ▾`;
+              localStorage.setItem('user_global_location', `${localizedAddress} ▾`);
+              // Can save coordinates too if we want to pass them directly to the request page later
+              localStorage.setItem('user_global_coords', JSON.stringify({ lat, lon }));
+            } else {
+              textEl.innerText = "Location Found ▾";
+            }
+          } catch (e) {
+            console.error("Nominatim reverse geocoding failed", e);
+            textEl.innerText = "GPS Error ▾";
+          }
+        }, (err) => {
+          console.error("GPS access denied or failed", err);
+          textEl.innerText = "Select Location ▾";
+        }, { enableHighAccuracy: true, timeout: 10000 });
+      } else {
+        textEl.innerText = "No GPS ▾";
+      }
+    }
+
+    // Auto-fetch on DOM load if not cached (or load from cache)
+    window.addEventListener('DOMContentLoaded', () => {
+      const cachedLoc = localStorage.getItem('user_global_location');
+      if (cachedLoc) {
+        document.getElementById('global-location-text').innerText = cachedLoc;
+      } else {
+        fetchGlobalLocation();
+      }
+    });
+  </script>
+</body>
+
+</html>

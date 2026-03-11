@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+
+<body>
+
+  <div class="top-bar">
+    <div class="top-bar-left">
+      <a href="javascript:history.back()" class="top-bar-back" title="Go Back">
+        <svg viewBox="0 0 24 24">
+          <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
+        </svg>
+      </a>
+      <a href="index.html" class="top-bar-link">Home</a>
+    </div>
+    <div class="top-bar-right" id="auth-bar">
+      <a href="login.html" class="top-bar-link">Login</a>
+      <a href="register.html" class="top-bar-link top-bar-link--primary">Sign Up</a>
+    </div>
+  </div>
+
+  <section class="formSection">
+    <h2>Admin Dashboard</h2>
+    <div id="map"
+      style="height: 300px; width: 100%; border-radius: 12px; margin-bottom: 20px; border: 1px solid #ddd; z-index: 1;">
+    </div>
+    </div>
+
+    <section class="formSection">
+      <h2>Admin Dashboard</h2>
+      <div id="map"
+        style="height: 300px; width: 100%; border-radius: 12px; margin-bottom: 20px; border: 1px solid #ddd; z-index: 1;">
+      </div>
+      <div id="requests"></div>
+    </section>
+
+    <script src="../js/script.js"></script>
+
+    <script type="module">
+      import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+      import { collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+      import { auth, db } from "../js/firebase-init.js";
+
+      onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          // Admin logic...
+        } else {
+          window.location.href = "login.html";
+        }
+      });
+    </script>
+</body>
+
+</html>
